@@ -22,7 +22,9 @@ class App extends Component {
       if (drizzleState.drizzleStatus.initialized) {
         this.setState({ loading: false, drizzleState });
       }
+
     });
+
   }
 
   componentWillUnmount() {
@@ -36,11 +38,15 @@ class App extends Component {
         <ReadString
           drizzle={this.props.drizzle}
           drizzleState={this.state.drizzleState}
+          contract={this.props.contract}
         />
         <SetString
           drizzle={this.props.drizzle}
           drizzleState={this.state.drizzleState}
+          contract={this.props.contract}
+          web3={this.props.web3}
         />
+        {console.log()}
       </div>
     );
   }

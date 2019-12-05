@@ -8,10 +8,12 @@ class ReadString extends React.Component {
     const contract = drizzle.contracts.MyStringStore;
 
     // let drizzle know we want to watch the `myString` method
-    const dataKey = contract.methods["myString"].cacheCall();
+    //const dataKey = contract.methods["myString"].cacheCall();
+    this.props.contract.methods.myString().call().then((promise) => {
+      this.setState({dataKey: promise});
+    });
 
     // save the `dataKey` to local component state for later reference
-    this.setState({ dataKey });
   }
 
   render() {
@@ -22,7 +24,9 @@ class ReadString extends React.Component {
     const myString = MyStringStore.myString[this.state.dataKey];
 
     // if it exists, then we display its value
-    return <p>My stored string: {myString && myString.value}</p>;
+    return (
+    <p>My stored string: {this.state.dataKey}</p>
+    );
   }
 }
 
